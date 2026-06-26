@@ -1,0 +1,420 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sets Reviewer for Grade 5</title>
+<style>
+:root{
+  --green:#2f6b2f; --leaf:#4f9d3a; --light:#f3ffe8; --cream:#fffdf2;
+  --brown:#7a4b20; --gold:#ffd86b; --text:#1d2b1f; --card:#ffffff;
+  --bad:#d9534f; --good:#2e8b57;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top left,#d8f8c8 0 18%,transparent 19%),
+    linear-gradient(180deg,#e8ffd8,#f8fff1);
+  line-height:1.55;
+}
+header{
+  text-align:center;
+  padding:34px 16px 24px;
+  background:linear-gradient(135deg,#2f7d32,#75bd45);
+  color:white;
+  border-bottom:8px solid #d7a642;
+  position:relative;
+}
+header h1{font-size:clamp(34px,8vw,70px);margin:0;font-weight:900;letter-spacing:4px}
+header p{font-size:clamp(16px,3vw,24px);margin:8px 0 0}
+.leaf{font-size:34px}
+.container{max-width:1100px;margin:auto;padding:18px}
+.card{
+  background:var(--card);
+  border:3px solid #cbe6a3;
+  border-radius:22px;
+  padding:20px;
+  margin:18px 0;
+  box-shadow:0 8px 18px rgba(48,95,33,.12);
+}
+h2{
+  color:var(--green);
+  border-left:10px solid var(--leaf);
+  padding-left:12px;
+  margin-top:0;
+}
+h3{color:#355e22;margin-bottom:8px}
+.simple-box{
+  background:#f6ffe9;
+  border-left:8px solid var(--leaf);
+  border-radius:14px;
+  padding:14px;
+  margin:12px 0;
+}
+.example{
+  background:#fff8d7;
+  border:2px dashed #d9a83c;
+  border-radius:14px;
+  padding:12px;
+  margin:10px 0;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.term{
+  background:#ffffff;
+  border:2px solid #dbeec3;
+  border-radius:18px;
+  padding:15px;
+}
+.term b{color:var(--green);font-size:1.1em}
+.code{
+  font-family:Consolas,monospace;
+  background:#eef9e4;
+  padding:3px 6px;
+  border-radius:6px;
+  white-space:nowrap;
+}
+.accordion button{
+  width:100%;
+  text-align:left;
+  background:#e6f7cf;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  margin:6px 0;
+  font-size:18px;
+  font-weight:bold;
+  color:#204c1f;
+  cursor:pointer;
+}
+.panel{display:none;padding:10px 15px;border-left:4px solid #8fc75a;background:#fbfff5;border-radius:0 0 14px 14px}
+ul{padding-left:22px}
+.quiz-card{
+  background:#fffdf3;
+  border:3px solid #b9dd8b;
+  border-radius:24px;
+  padding:18px;
+}
+.option{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:13px;
+  margin:9px 0;
+  border:2px solid #cfe8b2;
+  border-radius:14px;
+  background:white;
+  cursor:pointer;
+  font-size:17px;
+}
+.option:hover{background:#f0ffe0}
+.option.correct{background:#dcf8df;border-color:var(--good)}
+.option.wrong{background:#ffe0de;border-color:var(--bad)}
+button.main{
+  border:0;
+  background:linear-gradient(135deg,#2f7d32,#76b947);
+  color:white;
+  padding:13px 20px;
+  border-radius:999px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  margin:6px;
+}
+button.secondary{background:linear-gradient(135deg,#6d8d3b,#b6d36d)}
+.feedback{
+  padding:14px;
+  border-radius:14px;
+  margin-top:12px;
+  display:none;
+  font-weight:bold;
+}
+.progress-wrap{height:18px;background:#dfeecb;border-radius:999px;overflow:hidden;margin:12px 0}
+.progress{height:100%;width:0;background:#66aa3d;transition:.3s}
+.score{font-size:20px;font-weight:bold;color:var(--green)}
+table{width:100%;border-collapse:collapse;margin:10px 0;background:white}
+th,td{border:1px solid #bad59b;padding:10px;text-align:left}
+th{background:#dcf4c5;color:#254d1f}
+.footer{text-align:center;padding:24px;color:#3d6330}
+.badge{
+  display:inline-block;background:#e8f7cf;border:2px solid #a7cf74;border-radius:999px;
+  padding:6px 12px;margin:5px;font-weight:bold;color:#345b25
+}
+@media(max-width:650px){
+  .container{padding:10px}
+  .card{padding:14px}
+  .option{font-size:16px}
+  table{font-size:14px}
+}
+@media print{
+  button,.quiz-card{display:none!important}
+  body{background:white}
+  .card{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="leaf">🌿 🐿️ 🍃</div>
+  <h1>SETS</h1>
+  <p>Easy Reviewer for Grade 5 Learners</p>
+</header>
+
+<main class="container">
+
+<section class="card">
+  <h2>1. What is a Set?</h2>
+  <p>A <b>set</b> is a group or collection of objects. The objects inside a set are called <b>elements</b>.</p>
+  <div class="example">
+    <b>Example:</b> A set of colors of the Philippine flag is <span class="code">{red, white, blue}</span>.
+  </div>
+  <p>Sets are usually named using capital letters like <b>A, B, C, U</b>.</p>
+  <p>We write the elements inside curly braces: <span class="code">{ }</span></p>
+</section>
+
+<section class="card">
+  <h2>2. Important Set Words</h2>
+  <div class="grid">
+    <div class="term"><b>Element</b><p>An object inside a set.</p><p>Example: In A = {cat, dog}, cat is an element of A.</p></div>
+    <div class="term"><b>Cardinality</b><p>The number of elements in a set.</p><p>If A = {red, white, blue}, then n(A) = 3.</p></div>
+    <div class="term"><b>Empty Set / Null Set</b><p>A set with no elements.</p><p>Written as <span class="code">{ }</span> or <span class="code">∅</span>.</p></div>
+    <div class="term"><b>Equal Sets</b><p>Sets with exactly the same elements.</p><p>{A, B, C} = {C, B, A}</p></div>
+    <div class="term"><b>Equivalent Sets</b><p>Sets with the same number of elements.</p><p>{red, blue} and {cat, dog} are equivalent because both have 2 elements.</p></div>
+    <div class="term"><b>Universal Set</b><p>The set of all objects being talked about in the problem.</p><p>Usually written as <b>U</b>.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>3. Three Ways to Describe a Set</h2>
+  <div class="grid">
+    <div class="term">
+      <b>1. Roster or Listing Method</b>
+      <p>List every element inside curly braces.</p>
+      <div class="example">A = {1, 2, 3, 4, 5}</div>
+    </div>
+    <div class="term">
+      <b>2. Verbal Description Method</b>
+      <p>Describe the set using words.</p>
+      <div class="example">A is the set of counting numbers from 1 to 5.</div>
+    </div>
+    <div class="term">
+      <b>3. Set Builder Notation</b>
+      <p>Describe the set using a rule.</p>
+      <div class="example">A = {x | x is a counting number from 1 to 5}</div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>4. Well-Defined Set</h2>
+  <p>A set is <b>well-defined</b> if we can clearly decide whether an object belongs to it or not.</p>
+  <div class="grid">
+    <div class="simple-box">
+      <b>Well-defined:</b><br>
+      A = {1, 3, 5, 7, 9, ...}<br>
+      This is clear because it means odd counting numbers.
+    </div>
+    <div class="simple-box">
+      <b>Not well-defined:</b><br>
+      Set of intelligent students<br>
+      This is not clear because people may have different opinions.
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>5. Subset and Proper Subset</h2>
+  <p><b>A is a subset of B</b> if every element of A is also in B.</p>
+  <div class="example">
+    A = {1, 2}<br>
+    B = {1, 2, 3}<br>
+    Since 1 and 2 are also in B, <span class="code">A ⊆ B</span>.
+  </div>
+  <p><b>Proper subset</b> means A is inside B, but B has at least one extra element.</p>
+  <div class="example">
+    A = {1, 2}<br>
+    B = {1, 2, 3}<br>
+    A is a proper subset of B: <span class="code">A ⊂ B</span>.
+  </div>
+  <div class="simple-box">
+    Remember:
+    <ul>
+      <li>Every set is a subset of itself.</li>
+      <li>The empty set <span class="code">{ }</span> is a subset of every set.</li>
+      <li>For a set with 3 elements, there are 8 subsets.</li>
+      <li>For a set with 4 elements, there are 16 subsets.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="card">
+  <h2>6. Complement of a Set</h2>
+  <p>The <b>complement</b> of set A is written as <span class="code">A'</span>. It means all elements in the universal set <b>U</b> that are <b>not</b> in A.</p>
+  <div class="example">
+    U = {1, 2, 3, 4, 5, 6, 7}<br>
+    A = {2, 4, 6}<br>
+    A' = {1, 3, 5, 7}
+  </div>
+</section>
+
+<section class="card accordion">
+  <h2>7. Easy Examples</h2>
+  <button onclick="togglePanel(this)">Example 1: Elements and Cardinality</button>
+  <div class="panel">
+    A = {red, white, blue}<br>
+    Elements: red, white, blue<br>
+    Cardinality: n(A) = 3
+  </div>
+  <button onclick="togglePanel(this)">Example 2: Equal vs Equivalent</button>
+  <div class="panel">
+    {T, O, P} = {P, O, T} is TRUE because they have exactly the same elements.<br><br>
+    {solid, liquid, gas} ~ {red, white, blue} is TRUE because both sets have 3 elements.
+  </div>
+  <button onclick="togglePanel(this)">Example 3: Complement</button>
+  <div class="panel">
+    U = {H, O, N, E, S, T, Y}<br>
+    A = {O, N, E}<br>
+    A' = {H, S, T, Y}
+  </div>
+  <button onclick="togglePanel(this)">Example 4: Subsets of {r, e, x}</button>
+  <div class="panel">
+    { }, {r}, {e}, {x}, {r, e}, {r, x}, {e, x}, {r, e, x}<br>
+    There are 8 subsets.
+  </div>
+</section>
+
+<section class="card">
+  <h2>8. Quick Memory Tips</h2>
+  <span class="badge">Roster = list</span>
+  <span class="badge">Verbal = words</span>
+  <span class="badge">Set builder = rule</span>
+  <span class="badge">n(A) = number of elements</span>
+  <span class="badge">A' = not in A</span>
+  <span class="badge">U = everything in the problem</span>
+</section>
+
+<section class="card quiz-card">
+  <h2>🌳 Random Quiz: 5 Questions Only</h2>
+  <p>There are 20 questions stored. Each quiz round randomly shows only 5 questions. Choices are also shuffled.</p>
+  <div class="score" id="status">Click Start Quiz.</div>
+  <div class="progress-wrap"><div class="progress" id="bar"></div></div>
+  <div id="quizArea"></div>
+  <div id="feedback" class="feedback"></div>
+  <button class="main" onclick="startQuiz()">Start / New Random Quiz</button>
+  <button class="main secondary" id="nextBtn" onclick="nextQuestion()" style="display:none">Next</button>
+</section>
+
+</main>
+
+<div class="footer">🌿 Keep practicing. Sets become easy when you group things clearly. 🌿</div>
+
+<script>
+const questions = [
+ {q:"Which method describes a set by listing each element?", a:"Roster or Listing Method", o:["Verbal Description Method","Set Builder Notation","Complement Method"]},
+ {q:"What symbols are used to write elements of a set?", a:"Curly braces { }", o:["Parentheses ( )","Brackets [ ]","Quotation marks \" \""]},
+ {q:"What is the cardinality of A = {red, white, blue}?", a:"3", o:["1","2","4"]},
+ {q:"Which means an object belongs to a set?", a:"Element", o:["Universal set","Complement","Proper subset"]},
+ {q:"Which set is empty?", a:"{ }", o:["{0}","{∅}","{1}"]},
+ {q:"What is a universal set?", a:"The set of all objects considered in a problem", o:["A set with no elements","A set with one element","A set written only in words"]},
+ {q:"If A = {1,2} and B = {1,2,3}, what is true?", a:"A ⊆ B", o:["B ⊆ A","A = B","A is not related to B"]},
+ {q:"What does A' mean?", a:"The complement of A", o:["The cardinality of A","The universal set","The empty set"]},
+ {q:"Given U = {1,2,3,4,5} and A = {1,3,5}, what is A'?", a:"{2,4}", o:["{1,3,5}","{1,2,3}","{4,5}"]},
+ {q:"Which is a verbal description?", a:"A is the set of vowels.", o:["A = {a,e,i,o,u}","A = {x | x is a vowel}","A ⊆ B"]},
+ {q:"Which is set builder notation?", a:"A = {x | x is a vowel}", o:["A = {a,e,i,o,u}","A is the set of vowels.","n(A)=5"]},
+ {q:"Which set is well-defined?", a:"Set of months in a year", o:["Set of beautiful flowers","Set of intelligent pupils","Set of big people"]},
+ {q:"Which set is NOT well-defined?", a:"Set of honest people", o:["Set of even numbers","Set of vowels","Set of days in a week"]},
+ {q:"If two sets have exactly the same elements, they are called what?", a:"Equal sets", o:["Equivalent sets","Universal sets","Empty sets"]},
+ {q:"If two sets have the same number of elements, they are called what?", a:"Equivalent sets", o:["Equal sets","Complement sets","Null sets"]},
+ {q:"How many subsets does {r,e,x} have?", a:"8", o:["3","6","9"]},
+ {q:"How many subsets does {f,o,u,r} have?", a:"16", o:["4","8","12"]},
+ {q:"Which is always a subset of every set?", a:"The empty set", o:["The universal set","A complement","A single letter"]},
+ {q:"Given U={H,O,N,E,S,T,Y} and A={O,N,E}, what is A'?", a:"{H,S,T,Y}", o:["{O,N,E}","{H,O,N}","{E,S,T}"]},
+ {q:"Which statement about proper subset is correct?", a:"B has at least one element not in A", o:["A and B must be equal","A has no elements only","A is the universal set"]}
+];
+
+let quiz = [], index = 0, score = 0, answered = false;
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function startQuiz(){
+  quiz = shuffle(questions).slice(0,5).map(item=>{
+    return {...item, choices: shuffle([item.a, ...item.o])};
+  });
+  index = 0; score = 0; answered = false;
+  document.getElementById("nextBtn").style.display="none";
+  showQuestion();
+}
+function showQuestion(){
+  answered = false;
+  const item = quiz[index];
+  document.getElementById("status").textContent = `Question ${index+1} of 5 | Score: ${score}`;
+  document.getElementById("bar").style.width = `${(index/5)*100}%`;
+  document.getElementById("feedback").style.display="none";
+  let html = `<h3>${item.q}</h3>`;
+  item.choices.forEach(choice=>{
+    html += `<button class="option" onclick="chooseAnswer(this,'${escapeText(choice)}')">${choice}</button>`;
+  });
+  document.getElementById("quizArea").innerHTML = html;
+}
+function escapeText(t){return t.replace(/'/g,"&#39;").replace(/"/g,"&quot;");}
+function chooseAnswer(btn, choice){
+  if(answered) return;
+  answered = true;
+  const item = quiz[index];
+  const buttons = document.querySelectorAll(".option");
+  buttons.forEach(b=>{
+    if(b.textContent === item.a) b.classList.add("correct");
+  });
+  const feedback = document.getElementById("feedback");
+  if(choice === item.a){
+    score++;
+    btn.classList.add("correct");
+    feedback.style.background="#dcf8df";
+    feedback.style.color="#17633c";
+    feedback.textContent = "✅ Correct! Great job.";
+  }else{
+    btn.classList.add("wrong");
+    feedback.style.background="#ffe0de";
+    feedback.style.color="#7c241f";
+    feedback.textContent = "❌ Not correct. Correct answer: " + item.a;
+  }
+  feedback.style.display="block";
+  document.getElementById("nextBtn").style.display="inline-block";
+  document.getElementById("status").textContent = `Question ${index+1} of 5 | Score: ${score}`;
+}
+function nextQuestion(){
+  index++;
+  if(index >= 5){
+    document.getElementById("bar").style.width = "100%";
+    let msg = score === 5 ? "🌟 Perfect! You are a Sets Master!" :
+              score >= 3 ? "🌿 Good job! Review the missed items and try again." :
+              "🍃 Keep practicing. You can do better next round.";
+    document.getElementById("quizArea").innerHTML = `<h3>Quiz Finished!</h3><p class="score">Your score: ${score}/5</p><p>${msg}</p>`;
+    document.getElementById("feedback").style.display="none";
+    document.getElementById("nextBtn").style.display="none";
+    document.getElementById("status").textContent = "Finished";
+  }else{
+    showQuestion();
+  }
+}
+function togglePanel(btn){
+  const panel = btn.nextElementSibling;
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+}
+</script>
+</body>
+</html>'''
+
+path = Path('/mnt/data/Sets_Reviewer_Grade5_Nature_Quiz.html')
+path.write_text(html, encoding='utf-8')
+print(f"Created: {path}")
